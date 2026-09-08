@@ -10,6 +10,9 @@ export default defineConfig(
   vue.configs['flat/recommended'],
   {
     files: ['**/*.vue'],
-    languageOptions: { parserOptions: { parser: tseslint.parser } },
+    languageOptions: {
+      parserOptions: { parser: tseslint.parser },
+      globals: { crypto: 'readonly', setInterval: 'readonly', clearInterval: 'readonly' },
+    },
   },
 )
