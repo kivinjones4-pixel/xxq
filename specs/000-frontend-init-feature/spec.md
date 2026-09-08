@@ -1,6 +1,7 @@
 # 最小前端初始化
 
 - 状态：完成（仅本次前端骨架范围）
+- 后续变更：001-frontend-prototype 已替换初始化首页，AC-02 的原首页文案证据仅保留为历史记录；当前导航与首页验收以 [001](../001-frontend-prototype/spec.md) 为准。基础工程检查由 001 回归。
 - 来源：用户 2026-09-08 请求；[项目提案](../proposal.md)、[REQ-ARCH-01 / REQ-DELIVERY-01](../spec.md)、[T-03](../task.md)、AGENTS.md 技术选型及 FE-01/03/08。
 
 ## 目标与范围

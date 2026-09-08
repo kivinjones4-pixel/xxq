@@ -5,9 +5,28 @@
 ## FE-01 技术与工程边界
 
 - 使用 Vue 3 Composition API、TS、Vite、Element Plus、Tailwind、Pinia、Vue Router、Axios；采用工程实际锁定版本，不将 `latest` 当成可复现版本。
-- 当前尚无前端工程。创建时记录 Node 与依赖兼容性，提交锁文件；JavaScript/TypeScript 沿用工程决定，不为单次 CR 擅自迁移语言或升级依赖。
+- 前端工程位于 frontend/。记录 Node 与依赖兼容性，提交锁文件；TypeScript 沿用工程决定，不为单次 CR 擅自迁移语言或升级依赖。
 - 建议按 views（页面）、components（复用组件）、composables（有状态逻辑）、api（请求与 DTO 映射）、stores（跨页面状态）、router、styles 划分；目录以实际项目为准，不为形式创建空抽象。
 - 页面负责交互编排，API 模块负责通信；组件不直接承担 DLMS 编解码、LLS 校验或后端任务调度。
+
+### FE-01a 页面目录约束（用户明确要求）
+
+- 保留工程现有 `src/views/` 命名。每个路由页面必须使用独立的 kebab-case 目录，以 `index.vue` 为入口；禁止直接在 views/ 下平铺页面 .vue 文件。
+- 页面私有组件放在该页面的 `components/`，私有类型放在 `types/`（如 types/index.ts）；页面私有逻辑可按需放在 composables/、model.ts 等位置。
+- components/、types/ 等目录按实际需要创建，不要求每个页面都有空目录。跨页面复用的组件、类型和状态提升到 src/components/、src/types/、src/stores/，页面之间不直接引用对方的私有目录。
+- 路由指向 `views/<page>/index.vue`，推荐动态导入。新增、迁移和审查页面时同时检查目录、路由引用及私有/共享边界。
+
+```text
+src/views/
+  meter-assets/
+    index.vue
+    components/MeterFormDialog.vue
+    types/index.ts
+  demand-read/
+    index.vue
+  system-logs/
+    index.vue
+```
 
 ## FE-02 组件与响应式状态
 
