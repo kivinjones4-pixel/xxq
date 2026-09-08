@@ -2,7 +2,7 @@
 
 HES（Head-end System）面向电表档案管理、随时抄表和系统日志查询，采用前后端分离、独立服务与消息队列架构，通过自研 DLMS/COSEM 协议组件和模拟表验证完整采集链路。
 
-**当前状态：前端骨架已建立，业务实现待开始。** 仓库包含原始 HTML 指导文档、SDD 规范、开发任务、项目技能与 frontend/ 工程；后端服务及数据库初始化脚本尚未实现。实施进度以 [任务清单](specs/task.md) 为准。
+**当前状态：前端三个主要模块原型已建立，真实业务链路待实现。** 仓库包含原始 HTML 指导文档、SDD 规范、开发任务、项目技能与 frontend/ 工程；原型使用内存演示数据，后端服务及数据库初始化脚本尚未实现。实施进度以 [任务清单](specs/task.md) 为准。
 
 ## 计划实现的功能
 
@@ -117,4 +117,4 @@ python skills/hes-spec-workflow/scripts/extract_html.py docs
 ## 前端快速启动
 
 最小前端工程位于 [frontend/](frontend/README.md)。使用 Node 24.10.0 / npm 11.6.1，执行 `cd frontend`、`npm ci`、`npm run dev`，访问 http://127.0.0.1:5173。
-当前仅工程首页，业务能力仍待实现；验收见 [初始化规范](specs/000-frontend-init-feature/spec.md)。
+当前包含电表档案、随时抄表、系统日志三个交互原型；使用演示数据，刷新恢复。范围与证据见 [原型规范](specs/001-frontend-prototype/spec.md)。页面遵循 `views/<page>/index.vue` 独立目录约束。

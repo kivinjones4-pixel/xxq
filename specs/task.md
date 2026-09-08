@@ -18,6 +18,8 @@
 
 ## Phase 2：Core Services 与 API
 
+界面预研：[001-frontend-prototype](001-frontend-prototype/spec.md) 单独记录原型完成证据；T-12、T-13、T-14 仍需真实 API 联调，不随原型完成而勾选。
+
 - [ ] T-08 B：实现电表档案与数据项 API，含字段校验、导入导出。验收：档案生命周期、唯一性、错误行、查询导出场景通过；关联 REQ-METER-01、REQ-METER-02、REQ-API-01；依赖 T-02/T-04。
 - [ ] T-09 D：实现 Channels TCP 监听、登录/心跳、地址映射、LLS 与转发。验收：认证失败不发 GET，超时清理与重连符合合同；关联 REQ-CONN-01、REQ-AUTH-01；依赖 T-05/T-06。
 - [ ] T-10 E：实现多实例模拟表，读取档案、主动连接、认证校验、模拟数据和重连。验收：不同表独立连接，返回正确类型/范围的数据；关联 REQ-SIM-01；依赖 T-04/T-05/T-09。

@@ -1,6 +1,7 @@
 # HES 行为规范
 
 前端工程初始化的补充验收见 [000-frontend-init-feature](000-frontend-init-feature/spec.md)，关联 REQ-ARCH-01、REQ-DELIVERY-01；不改变下述业务验收条件。
+主要模块界面及页面独立目录补充验收见 [001-frontend-prototype](001-frontend-prototype/spec.md)；演示数据不作为下述业务功能的完成证据。
 
 状态：原文要求基线；“设计补充”属于本次整理提出的稳健性要求，待在实现相关任务时确定细节。需求 ID 用于任务与验证追踪；场景使用 Given/When/Then（前置/操作/预期）。来源编号对应 [reference.md](reference.md)。
 

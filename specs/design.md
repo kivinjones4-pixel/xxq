@@ -2,7 +2,7 @@
 
 ## Context
 
-来源：文档 02、03、04、05、06、07、08、09、11。架构是四个独立 Spring Boot 服务、一个 Vue 前端、一个公共组件模块；部署到 Windows。当前 frontend/ 初始化工程骨架，尚无业务实现，以下区分“原文约束”和“建议/待定”。
+来源：文档 02、03、04、05、06、07、08、09、11。架构是四个独立 Spring Boot 服务、一个 Vue 前端、一个公共组件模块；部署到 Windows。当前 frontend/ 包含工程骨架和三个演示原型，尚无真实业务链路，以下区分“原文约束”和“建议/待定”。
 
 ## 模块与数据流（原文约束）
 
@@ -20,6 +20,10 @@
 模拟表先连接并登录。Channels 保存电表地址→连接映射。未建立应用连接时，Channels 使用 UCI 传入的档案密码发送 AARQ，AARE 成功后才发送 GET。应用连接已成功的当前会话可复用；断线后必须重新登录和建立应用连接。
 
 ## Decisions
+
+### DEC-09 主要模块原型与页面组织（用户明确要求）
+
+每个路由页面使用 views/<page>/index.vue，页面私有 components/、types/ 按需建立；跨页共享内容独立提升。规则见 [FE-01a](../skills/hes-frontend-cr/references/frontend-cr.md)。三个原型使用内存演示数据，具体交互假设和验证见 [001](001-frontend-prototype/spec.md)，不新增正式 API 合同。
 
 ### DEC-08 最小前端骨架（用户本次范围）
 
