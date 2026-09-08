@@ -1,0 +1,59 @@
+# Frontend dependencies and build output
+node_modules/
+dist/
+.npm-cache/
+.vite/
+.vite-temp/
+coverage/
+*.tsbuildinfo
+
+# Java / Maven build output (keep Maven Wrapper files)
+target/
+*.class
+
+# Local environment and private configuration
+.env
+.env.*
+!.env.example
+!.env.sample
+!.env.template
+*.local
+
+# Runtime logs and temporary files
+logs/
+*.log
+*.log.*
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+*.tmp
+*.swp
+*.swo
+*~
+
+# IDE user state (keep shared VS Code configuration)
+.idea/
+*.iml
+*.ipr
+*.iws
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+.classpath
+.project
+.settings/
+
+# Python helper-script cache
+__pycache__/
+*.py[cod]
+.venv/
+.pytest_cache/
+
+# Operating system metadata
+.DS_Store
+Thumbs.db
+Desktop.ini
+$RECYCLE.BIN/

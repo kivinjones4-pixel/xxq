@@ -7,6 +7,7 @@
 - [ ] T-01 全员：解决 Q-01 协议格式问题，记录固定报文样本、依据与编码范围。验收：Protocol、Channels、模拟表共享明确合同；关联 REQ-PROTO-01。
 - [ ] T-02 B/C/D/E：细化 Q-02–Q-07，确定 HTTP DTO、结果通路、MQ 粒度和错误语义。验收：受影响模块能按合同独立开发；关联 REQ-API-01、REQ-MQ-01、REQ-READ-02。
 - [ ] T-03 A/B/C/D/E：建立 Vue 前端与四个独立 Maven/Spring Boot 服务、Common 组件结构，锁定兼容版本与配置。验收：骨架可运行且四服务独立打包；关联 REQ-ARCH-01、REQ-DELIVERY-01。
+  - 前端部分独立跟踪于 [000-frontend-init-feature](000-frontend-init-feature/spec.md)，后端与 Common 骨架未实现，总任务保持未完成。
 - [ ] T-04 B：编写数据库初始化 SQL、索引与字典种子数据。验收：可在空库初始化，重复地址/数据项被拒绝，同 OBIS 不同属性可保存；关联 REQ-DATA-01；依赖 T-02。
 
 ## Phase 1：Common 核心组件

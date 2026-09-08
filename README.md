@@ -2,7 +2,7 @@
 
 HES（Head-end System）面向电表档案管理、随时抄表和系统日志查询，采用前后端分离、独立服务与消息队列架构，通过自研 DLMS/COSEM 协议组件和模拟表验证完整采集链路。
 
-**当前状态：需求与设计阶段。** 仓库已整理原始 HTML 指导文档、SDD 规范、开发任务与项目技能，尚未包含业务源码、工程构建配置、数据库初始化脚本或可运行服务。实施进度以 [任务清单](specs/task.md) 为准。
+**当前状态：前端骨架已建立，业务实现待开始。** 仓库包含原始 HTML 指导文档、SDD 规范、开发任务、项目技能与 frontend/ 工程；后端服务及数据库初始化脚本尚未实现。实施进度以 [任务清单](specs/task.md) 为准。
 
 ## 计划实现的功能
 
@@ -93,7 +93,7 @@ python skills/hes-spec-workflow/scripts/extract_html.py docs
 
 ## 开发与验收
 
-功能/迭代规范使用“一需求一目录”，例如 `specs/000-frontend-init-feature/spec.md`。每份规范明确这次做什么、不做什么、如何验证和什么算完成；现有根部规范作为项目背景保留。使用 [spec 自动更新与生成](skills/spec-auto-update/SKILL.md) 创建或更新，技能附带可执行规范模板。这里的目录仅为命名示例，尚未创建对应迭代。
+功能/迭代规范使用“一需求一目录”，首个迭代为 [最小前端初始化](specs/000-frontend-init-feature/spec.md)。每份规范明确范围、验证方式和完成条件；现有根部规范作为项目背景保留。使用 [spec 自动更新与生成](skills/spec-auto-update/SKILL.md) 创建或更新。
 
 采用 SDD（规范驱动开发）：先明确 proposal 中的目的与范围，再维护 spec 的行为场景、design 的实现决策和 task 的执行清单。借鉴 OpenSpec 的分层方式，当前没有配置 OpenSpec CLI。
 
@@ -114,3 +114,7 @@ python skills/hes-spec-workflow/scripts/extract_html.py docs
 规范维护可读取 [hes-spec-workflow](skills/hes-spec-workflow/SKILL.md)，联调验收可读取 [hes-integration-review](skills/hes-integration-review/SKILL.md)。仓库 `skills/` 需显式读取，不假定已被工具自动发现。
 
 前端开发遵循 [前端代码开发与审查规范](skills/hes-frontend-cr/references/frontend-cr.md)。进行前端 CR 时读取 [hes-frontend-cr](skills/hes-frontend-cr/SKILL.md)，按规范输出有代码位置、触发条件和影响依据的发现。所有技能描述以“当……时，……”明确触发场景。
+## 前端快速启动
+
+最小前端工程位于 [frontend/](frontend/README.md)。使用 Node 24.10.0 / npm 11.6.1，执行 `cd frontend`、`npm ci`、`npm run dev`，访问 http://127.0.0.1:5173。
+当前仅工程首页，业务能力仍待实现；验收见 [初始化规范](specs/000-frontend-init-feature/spec.md)。

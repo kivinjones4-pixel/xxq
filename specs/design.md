@@ -2,7 +2,7 @@
 
 ## Context
 
-来源：文档 02、03、04、05、06、07、08、09、11。架构是四个独立 Spring Boot 服务、一个 Vue 前端、一个公共组件模块；部署到 Windows。当前没有业务源码，以下区分“原文约束”和“建议/待定”。
+来源：文档 02、03、04、05、06、07、08、09、11。架构是四个独立 Spring Boot 服务、一个 Vue 前端、一个公共组件模块；部署到 Windows。当前 frontend/ 初始化工程骨架，尚无业务实现，以下区分“原文约束”和“建议/待定”。
 
 ## 模块与数据流（原文约束）
 
@@ -20,6 +20,10 @@
 模拟表先连接并登录。Channels 保存电表地址→连接映射。未建立应用连接时，Channels 使用 UCI 传入的档案密码发送 AARQ，AARE 成功后才发送 GET。应用连接已成功的当前会话可复用；断线后必须重新登录和建立应用连接。
 
 ## Decisions
+
+### DEC-08 最小前端骨架（用户本次范围）
+
+使用 frontend/ 独立 npm 工程，Vue 3 + TS + Vite，接入约定的 Element Plus、Tailwind、Pinia、Vue Router 与 Axios。首页采用 hash 路由，统一 JSON 请求入口使用 /api/v1，开发代理仅通往 Web BackEnd。版本与 Node 兼容依据集中于 [版本记录](000-frontend-init-feature/versions.md)，验收见 [功能规范](000-frontend-init-feature/spec.md)。不提前定义 Q-02/Q-06 中的业务 DTO 或结果接口。
 
 ### DEC-01 服务隔离（原文约束）
 
