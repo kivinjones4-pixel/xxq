@@ -21,6 +21,10 @@
 
 ## Decisions
 
+### DEC-10 Tailwind 样式组织（用户明确要求）
+
+三个原型页面及共享组件改用模板 Tailwind 工具类，保留 Element Plus 主题变量与基础重置。迁移不改变业务行为；响应式与动态状态验证及最终 CR 见 [002](002-tailwind-migration/spec.md)。
+
 ### DEC-09 主要模块原型与页面组织（用户明确要求）
 
 每个路由页面使用 views/<page>/index.vue，页面私有 components/、types/ 按需建立；跨页共享内容独立提升。规则见 [FE-01a](../skills/hes-frontend-cr/references/frontend-cr.md)。三个原型使用内存演示数据，具体交互假设和验证见 [001](001-frontend-prototype/spec.md)，不新增正式 API 合同。

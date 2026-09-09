@@ -18,6 +18,8 @@
 
 ## Phase 2：Core Services 与 API
 
+样式维护：[002-tailwind-migration](002-tailwind-migration/spec.md) 跟踪 Tailwind 迁移、回归和最终 CR，不改变业务交付任务状态。
+
 界面预研：[001-frontend-prototype](001-frontend-prototype/spec.md) 单独记录原型完成证据；T-12、T-13、T-14 仍需真实 API 联调，不随原型完成而勾选。
 
 - [ ] T-08 B：实现电表档案与数据项 API，含字段校验、导入导出。验收：档案生命周期、唯一性、错误行、查询导出场景通过；关联 REQ-METER-01、REQ-METER-02、REQ-API-01；依赖 T-02/T-04。

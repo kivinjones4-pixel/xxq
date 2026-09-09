@@ -51,4 +51,6 @@ src/views/
     types/index.ts
 ```
 
-版本见 [初始化规范](../specs/000-frontend-init-feature/spec.md)，原型范围与验证见 [001 原型规范](../specs/001-frontend-prototype/spec.md)。
+页面样式使用 Tailwind 工具类，动态状态采用完整静态类或 aria/data 变体。styles/main.css 仅保留入口、主题变量和基础重置；Element Plus 样式置于 components 层，内部覆盖限定于组件根节点。响应式 compact、tablet、wide 分别对应不大于 800px、800px 至 1150px、至少 1500px。
+
+版本见 [初始化规范](../specs/000-frontend-init-feature/spec.md)，原型范围与验证见 [001 原型规范](../specs/001-frontend-prototype/spec.md)，样式迁移与 CR 见 [002 迁移规范](../specs/002-tailwind-migration/spec.md)。
