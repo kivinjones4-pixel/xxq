@@ -24,10 +24,10 @@ function save() {
     :model-value="open"
     :title="readonly ? '电表详情' : meter ? '编辑电表' : '新增电表'"
     width="520px"
-    class="responsive-dialog"
+    class="max-w-[calc(100vw_-_32px)]"
     @close="emit('close')"
   >
-    <p class="dialog-note">
+    <p class="text-[#8a9a8f] text-[12px] leading-[1.8] mb-5">
       演示档案 · 仅保存在当前浏览器会话中
     </p>
     <ElAlert
@@ -88,15 +88,19 @@ function save() {
     </ElForm>
     <div
       v-if="readonly && meter"
-      class="detail-meta"
+      class="bg-[#f6f8f6] rounded-[5px] text-[12px] leading-[2] text-[#738779] p-4"
     >
       通信方式：TCP/IP · 协议：DLMS/COSEM<br>连接状态：{{ meter.online ? '在线' : '离线' }}（演示）<br>更新于：{{ meter.updatedAt }}
     </div>
     <template #footer>
-      <ElButton @click="emit('close')">
+      <ElButton
+        class="[&>span]:gap-1.75"
+        @click="emit('close')"
+      >
         {{ readonly ? '关闭' : '取消' }}
       </ElButton><ElButton
         v-if="!readonly"
+        class="[&>span]:gap-1.75"
         type="primary"
         @click="save"
       >
