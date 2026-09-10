@@ -1,11 +1,12 @@
 # HES 实施任务
 
-所有任务目前均未完成。本次文档生成不等于系统实现。勾选条件：实现、相关场景验证和证据路径均已记录。来源：10 的三阶段流程、11 的人员分工；需求编号对应 [spec.md](spec.md)，Q 编号对应 [reference.md](reference.md)。
+任务按实际交付记录状态。合同任务完成不等于系统实现；业务任务仍要求实现、场景验证和证据。来源：10 的三阶段流程、11 的人员分工；需求编号对应 [spec.md](spec.md)，Q 编号对应 [reference.md](reference.md)。
 
 ## Phase 1：Infrastructure 与契约
 
-- [ ] T-01 全员：解决 Q-01 协议格式问题，记录固定报文样本、依据与编码范围。验收：Protocol、Channels、模拟表共享明确合同；关联 REQ-PROTO-01。
+- [x] T-01 全员：解决 Q-01 协议格式问题，记录固定报文样本、依据与编码范围。验收：Protocol、Channels、模拟表共享明确合同；关联 REQ-PROTO-01。2026-09-10 文档合同与样本结构验证见 [003 证据](003-key-contracts/evidence.md)，Common 实现与独立互通仍由 T-05/T-16 验收。
 - [ ] T-02 B/C/D/E：细化 Q-02–Q-07，确定 HTTP DTO、结果通路、MQ 粒度和错误语义。验收：受影响模块能按合同独立开发；关联 REQ-API-01、REQ-MQ-01、REQ-READ-02。
+  - 步骤 1 所需 Q-02–Q-05、Q-06 抄读依赖部分已由 [003](003-key-contracts/spec.md) 完成；档案写入/导入导出及日志汇集合同尚未完成，T-02 保持未勾选。T-06/T-09/T-11 的合同依赖已就绪，T-04/T-07/T-08 仍需其余结论。
 - [ ] T-03 A/B/C/D/E：建立 Vue 前端与四个独立 Maven/Spring Boot 服务、Common 组件结构，锁定兼容版本与配置。验收：骨架可运行且四服务独立打包；关联 REQ-ARCH-01、REQ-DELIVERY-01。
   - 前端部分独立跟踪于 [000-frontend-init-feature](000-frontend-init-feature/spec.md)，后端与 Common 骨架未实现，总任务保持未完成。
 - [ ] T-04 B：编写数据库初始化 SQL、索引与字典种子数据。验收：可在空库初始化，重复地址/数据项被拒绝，同 OBIS 不同属性可保存；关联 REQ-DATA-01；依赖 T-02。

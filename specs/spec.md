@@ -1,5 +1,7 @@
 # HES 行为规范
 
+实施步骤 1 的可执行补充见 [003 关键合同](003-key-contracts/spec.md)。Q-01–Q-05 已形成设计合同：协议字节、抄读/查询 HTTP DTO、MQ、结果轮询和重试以该目录为准；下文涉及这些 Q 编号的引用表示追踪来源，不再表示尚无结论。Q-06 仅完成公共类型、选择查询与抄读字段，其他业务细节和 Q-07 仍待定。运行验收要求保持不变。
+
 前端工程初始化的补充验收见 [000-frontend-init-feature](000-frontend-init-feature/spec.md)，关联 REQ-ARCH-01、REQ-DELIVERY-01；不改变下述业务验收条件。
 主要模块界面及页面独立目录补充验收见 [001-frontend-prototype](001-frontend-prototype/spec.md)；演示数据不作为下述业务功能的完成证据。
 
@@ -210,6 +212,7 @@ Protocol 必须自研并被三个服务复用；实现 Wrapper、登录/心跳 B
 | /meter/export | 列表查询条件 | Excel/CSV 文件流 |
 | /dataItem/list | 分页、名称 | 数据项列表 |
 | /demandRead/start | 电表 ID 列表、数据项 ID 列表、超时、重试次数 | 任务 ID |
+| /demandRead/result | taskId；003 设计补充 | 各项状态的完整快照、计数、done、过期时间 |
 | /log/sys/list | 分页、时间、级别、关键词 | 日志列表 |
 | /log/sys/detail | 日志 ID | 完整日志 |
 | /log/sys/export | 日志查询条件 | Excel/CSV 文件流 |

@@ -21,6 +21,12 @@
 
 ## Decisions
 
+### DEC-11 关键合同（2026-09-10 设计补充）
+
+[003](003-key-contracts/spec.md) 固化当前最小链路：8 字节 Wrapper、BER 登录/心跳与 ACSE、A-XDR GET；POST 全量快照轮询；单表单项单尝试 MQ；UCI 独占业务重试；同表跨批次 FIFO；有限期限和不可覆写终态。具体字段、默认值、报文、连接轮换与内存生命周期以该目录为唯一维护点。
+
+DEC-02/04/05/06 中原有“待定”历史描述在本次范围内由下述修订替换；未扩大到 Q-06 全部业务 DTO 或 Q-07。协议修订遵循 00 优先级，来源冲突见 reference；不声称运行或标准互通已经通过。
+
 ### DEC-10 Tailwind 样式组织（用户明确要求）
 
 三个原型页面及共享组件改用模板 Tailwind 工具类，保留 Element Plus 主题变量与基础重置。迁移不改变业务行为；响应式与动态状态验证及最终 CR 见 [002](002-tailwind-migration/spec.md)。
@@ -39,9 +45,9 @@
 
 ### DEC-02 任务调度（原文约束 + 待定补充）
 
-每个选中电表都读取全部选中数据项；UCI 一表一任务，同任务逐项等待结果后推进，跨表并行。拟采用有界执行器与每表队列，避免资源无界增长；并发上限、同表跨批次调度、单项失败后是否继续见 Q-04。
+每个选中电表读取全部选中数据项；UCI 一表一任务，逐项等待结果，跨表并行。采用每表 FIFO、有界并发、失败后继续；上限和期限见 [执行合同](003-key-contracts/execution.md)。
 
-`taskId`（批次）、每表子任务标识、`messageId`、GET `invokeId` 应有显式关联。MQ 重投递、迟到响应的去重策略属于待定设计，不能依靠 MQ 自动保证业务只处理一次。
+taskId、meterTaskId、attemptId、messageId、connectionId、invokeId 显式关联；MQ 重投递和旧尝试隔离见 [HTTP/MQ](003-key-contracts/http-mq.md)，不依靠 MQ 自动保证业务只处理一次。
 
 ### DEC-03 数据模型（原文约束）
 
@@ -58,15 +64,15 @@
 
 外部接口统一 POST，路径与返回约定见 [spec.md](spec.md#req-api-01-http-契约)。常规 JSON 为 `code/message/data`；成功示例 code=200，失败示例 code=500、data=null；业务错误码枚举与 HTTP 状态对应关系尚未规定。文件导出为 Excel/CSV 流。
 
-MQMessage 字段：`priorityLevel`、`fromId/fromType`、`toId/toType`、`messageId`、`messageType`、`payload`。类型包含 `ReadTask/ReadResult/StatusReport`。抄读载荷提供电表 ID/地址、数据项 ID/OBIS/classId/attributeId、`authPassword`、`dlmsMessage`。文档载荷列出 `meters/dataItems` 集合；实际逐项调度的消息粒度待明确（Q-03）。
+MQMessage 保留原文字段和 ReadTask/ReadResult/StatusReport 类型，增加 schemaVersion；meters/dataItems 固定单元素，dlmsMessage 仅为 APDU。具体 DTO、抄读及查询 HTTP 错误规则见 [合同](003-key-contracts/http-mq.md)；其他业务细节仍见 Q-06。
 
 ### DEC-05 协议实现（原文约束 + 阻塞问题）
 
-Protocol 自研并由 UCI、Channels、模拟表复用。文档描述 Wrapper、ASN.1 BER、登录/心跳、LLS 和 GET。文档 07 §3.2 仅列出 1 字节 Version 和 2 字节 Length，§3.6 又将编码概括为 BER；线格式细节不足以直接作为完整标准互操作合同。Q-01 解决前不得据此声称已符合 IEC 标准，也不得把未经核实的字节布局固化为规范。
+Protocol 自研并由三个服务复用；[协议合同](003-key-contracts/protocol.md) 核对一手实现参考后按 00 标准方向纠正 07 的简化头和 GET BER 表述，明确扩展边界、最小编码范围和固定样本。Q-01 文档决策完成，独立互通验证保留在 T-05/T-16，不能声称已符合完整 IEC 标准。
 
-### DEC-06 实时结果（待定）
+### DEC-06 实时结果（003 已确定）
 
-原文规定 start 返回任务 ID，同时要求实时展示，但未定义结果获取接口。候选：SSE、WebSocket 或按任务轮询。需选择后补充路径、消息字段、完成标志、断线恢复、超时与保留期限，再实现前后端（Q-02）；当前不新增假定已存在的 API。
+新增 POST /api/v1/demandRead/result；前端串行轮询完整快照，UCI 持有结果，Web BackEnd 经内部 HTTP 转发。轮询间隔、断线恢复和保留见 [执行合同](003-key-contracts/execution.md)。选择原因是保持原 POST 风格、避免增加推送通道，代价为轮询延迟和请求开销。接口定义已完成，运行实现仍由 T-12 交付。
 
 ### DEC-07 日志（原文约束 + 设计补充）
 
