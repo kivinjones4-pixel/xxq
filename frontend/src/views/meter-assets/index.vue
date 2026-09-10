@@ -49,12 +49,17 @@ function importSample() {
 </script>
 
 <template>
-  <div class="page-heading">
+  <div class="flex items-center justify-between gap-5 compact:items-start mb-6.5">
     <div>
-      <div class="eyebrow">
+      <div class="text-[#82948b] text-[9px] tracking-[1.7px] font-semibold mb-2.25">
         ASSET MANAGEMENT
-      </div><h1>电表档案</h1><p>统一管理电表资产，掌握每一台设备的基本信息。</p>
+      </div><h1 class="text-[27px] tracking-[-.5px] font-[650] text-[#1b342a] compact:text-[23px] mb-2.25">
+        电表档案
+      </h1><p class="text-[12px] text-[#809088] leading-[1.6] compact:text-[11px]">
+        统一管理电表资产，掌握每一台设备的基本信息。
+      </p>
     </div><ElButton
+      class="[&>span]:gap-1.75"
       type="primary"
       size="large"
       @click="openForm()"
@@ -65,7 +70,7 @@ function importSample() {
       />新增电表
     </ElButton>
   </div>
-  <div class="stats-grid">
+  <div class="grid grid-cols-4 gap-4 compact:grid-cols-2 compact:gap-2.5 mb-6.5">
     <StatCard
       label="电表总数"
       :value="store.meters.length"
@@ -93,15 +98,25 @@ function importSample() {
       tone="blue"
     />
   </div>
-  <section class="panel">
-    <div class="panel-title">
-      <div><h2>档案列表 <span class="count-badge">{{ filtered.length }}</span></h2><p>查看、维护和导出演示电表档案</p></div><div class="button-group">
-        <ElButton @click="importOpen = true; imported = false">
+  <section class="bg-white border border-solid border-[#e3eae6] rounded-[9px] overflow-hidden min-w-0">
+    <div class="flex justify-between items-center gap-4 compact:flex-wrap px-6 pt-5.75 pb-5 compact:px-4 compact:py-4.5">
+      <div>
+        <h2 class="flex items-center gap-2.5 text-[15px] font-semibold">
+          档案列表 <span class="text-[10px] font-medium bg-[#f0f4f1] text-[#708277] rounded-[5px] px-1.75 py-0.5">{{ filtered.length }}</span>
+        </h2><p class="text-[#97a39d] text-[10px] mt-1.75">
+          查看、维护和导出演示电表档案
+        </p>
+      </div><div>
+        <ElButton
+          class="[&>span]:gap-1.75"
+          @click="importOpen = true; imported = false"
+        >
           <AppIcon
             name="upload"
             :size="16"
           />导入预览
         </ElButton><ElButton
+          class="[&>span]:gap-1.75"
           :disabled="!filtered.length"
           @click="exportMeters"
         >
@@ -112,8 +127,8 @@ function importSample() {
         </ElButton>
       </div>
     </div>
-    <div class="filter-bar">
-      <label class="filter-field filter-search"><span>电表名称 / 表号</span><ElInput
+    <div class="bg-[#fcfdfc] border-t border-solid border-t-[#f0f3f1] border-b border-b-[#edf1ee] flex items-end gap-3.5 [&_.el-input]:w-full compact:flex-wrap px-6 py-4.75 compact:p-4">
+      <label class="flex flex-col gap-2 w-37.5 min-w-0 flex-1 max-w-[350px] [&_.el-select]:w-full tablet:w-32.5 compact:w-full compact:flex-1 compact:max-w-[none] compact:min-w-[110px] compact:basis-full"><span class="text-[11px] text-[#6b7e72]">电表名称 / 表号</span><ElInput
         v-model="filters.keyword"
         clearable
         placeholder="搜索电表名称或表号"
@@ -121,7 +136,7 @@ function importSample() {
         name="search"
         :size="16"
       /></template></ElInput></label>
-      <label class="filter-field"><span>电表类型</span><ElSelect
+      <label class="flex flex-col gap-2 w-37.5 min-w-0 [&_.el-select]:w-full tablet:w-32.5 compact:w-32.5 compact:flex-1 compact:min-w-[110px]"><span class="text-[11px] text-[#6b7e72]">电表类型</span><ElSelect
         v-model="filters.type"
         aria-label="电表类型筛选"
       ><ElOption
@@ -134,7 +149,7 @@ function importSample() {
         label="单相电表"
         value="单相电表"
       /></ElSelect></label>
-      <label class="filter-field"><span>启用状态</span><ElSelect
+      <label class="flex flex-col gap-2 w-37.5 min-w-0 [&_.el-select]:w-full tablet:w-32.5 compact:w-32.5 compact:flex-1 compact:min-w-[110px]"><span class="text-[11px] text-[#6b7e72]">启用状态</span><ElSelect
         v-model="filters.status"
         aria-label="启用状态筛选"
       ><ElOption
@@ -147,7 +162,10 @@ function importSample() {
         label="禁用"
         :value="0"
       /></ElSelect></label>
-      <ElButton @click="reset">
+      <ElButton
+        class="[&>span]:gap-1.75"
+        @click="reset"
+      >
         重置
       </ElButton>
     </div>
@@ -155,18 +173,18 @@ function importSample() {
       :data="visible"
       row-key="id"
       empty-text="没有匹配的电表，请调整筛选条件"
-      class="data-table"
+      class="[--el-table-header-bg-color:#fafcfb] [--el-table-border-color:#eef2ef] [--el-table-row-hover-bg-color:#f6faf7] [--el-table-header-text-color:#7c8c81] [--el-table-text-color:#4d6055] [&_th.el-table\_\_cell]:h-11.25 [&_th.el-table\_\_cell]:text-[11px] [&_th.el-table\_\_cell]:font-medium [&_td.el-table\_\_cell]:h-18.25 [&_td.el-table\_\_cell]:text-[12px] [&_.cell]:pl-5 [&_.cell]:pr-3 [&_.el-tag]:text-[10px] [&_.el-tag]:h-5.5 [&_.el-tag]:border-[transparent] [&_.el-tag]:rounded-[4px] [&_.el-button]:text-[11px] wide:[&_td.el-table\_\_cell]:h-20"
     >
       <ElTableColumn
         label="电表名称"
         min-width="210"
       >
         <template #default="{ row }">
-          <div class="meter-name">
-            <span class="table-icon"><AppIcon
+          <div class="flex items-center gap-2.5">
+            <span class="bg-[#f1f5f2] text-[#83a493] w-7.75 h-9 grid place-items-center rounded-[5px] shrink-0"><AppIcon
               name="meter"
               :size="18"
-            /></span><div><strong>{{ row.name }}</strong><small>{{ row.address }}</small></div>
+            /></span><div><strong class="block font-medium text-[#3e5547]">{{ row.name }}</strong><small class="block text-[#94a198] text-[10px] font-['Segoe_UI',_sans-serif] mt-0.75">{{ row.address }}</small></div>
           </div>
         </template>
       </ElTableColumn>
@@ -179,7 +197,7 @@ function importSample() {
         label="通信协议"
         min-width="135"
       >
-        <span class="subtle-text">DLMS/COSEM</span>
+        <span class="text-[#93a099] text-[11px]">DLMS/COSEM</span>
       </ElTableColumn>
       <ElTableColumn
         label="启用状态"
@@ -200,9 +218,9 @@ function importSample() {
       >
         <template #default="{ row }">
           <span
-            class="connection"
-            :class="{ offline: !row.online }"
-          ><i />{{ row.online ? '在线' : '离线' }}</span>
+            class="text-[11px] text-[#508967] whitespace-nowrap inline-flex items-center gap-1.5 data-[offline=true]:text-[#9ca69f] data-[offline=true]:[&>i]:bg-[#b7bfb9]"
+            :data-offline="!row.online"
+          ><i class="inline-block w-1.25 h-1.25 bg-[#59a77b] rounded-full" />{{ row.online ? '在线' : '离线' }}</span>
         </template>
       </ElTableColumn>
       <ElTableColumn
@@ -212,12 +230,14 @@ function importSample() {
       >
         <template #default="{ row }">
           <ElButton
+            class="[&>span]:gap-1.75"
             link
             type="primary"
             @click="openForm(row as Meter, true)"
           >
             详情
           </ElButton><ElButton
+            class="[&>span]:gap-1.75"
             link
             type="primary"
             @click="openForm(row as Meter)"
@@ -231,6 +251,7 @@ function importSample() {
           >
             <template #reference>
               <ElButton
+                class="[&>span]:gap-1.75"
                 link
                 type="danger"
               >
@@ -241,9 +262,10 @@ function importSample() {
         </template>
       </ElTableColumn>
     </ElTable>
-    <div class="table-footer">
-      <span>共 {{ filtered.length }} 条记录 · 每页 6 条</span><ElPagination
+    <div class="flex justify-between items-center gap-3 compact:flex-wrap px-5.5 py-4.25 compact:p-3.5">
+      <span class="text-[11px] text-[#8d9b92]">共 {{ filtered.length }} 条记录 · 每页 6 条</span><ElPagination
         v-model:current-page="page"
+        class="[--el-pagination-button-width:28px] [--el-pagination-button-height:28px] [--el-pagination-font-size:11px]"
         :total="filtered.length"
         :page-size="6"
         layout="prev, pager, next"
@@ -251,7 +273,7 @@ function importSample() {
       />
     </div>
   </section>
-  <div class="footnote">
+  <div class="flex gap-1.75 items-start text-[10px] text-[#94a197] leading-[1.6] mt-4.25">
     <AppIcon
       name="info"
       :size="15"
@@ -269,7 +291,7 @@ function importSample() {
     v-model="importOpen"
     title="导入校验预览"
     width="620px"
-    class="responsive-dialog"
+    class="max-w-[calc(100vw_-_32px)]"
   >
     <ElAlert
       title="固定样例预览，不会读取或上传本地文件。正式导入将在接口联调时接入。"
@@ -278,7 +300,7 @@ function importSample() {
     />
     <div
       v-if="imported"
-      class="import-result"
+      class="flex gap-2.5 text-[#16846b] px-0 py-4.5"
     >
       <AppIcon name="check" />已导入 1 条演示档案，2 条无效行未导入。
     </div>
@@ -300,9 +322,13 @@ function importSample() {
       />
     </ElTable>
     <template #footer>
-      <ElButton @click="importOpen = false">
+      <ElButton
+        class="[&>span]:gap-1.75"
+        @click="importOpen = false"
+      >
         关闭
       </ElButton><ElButton
+        class="[&>span]:gap-1.75"
         type="primary"
         :disabled="imported || !!sampleError"
         @click="importSample"
